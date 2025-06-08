@@ -62,6 +62,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
+📝 Dockerized To-Do App with Vector Search
+A full-stack, containerized to-do list app that supports semantic search using vector embeddings. It uses PostgreSQL with the pgvector extension to store and search embeddings of task descriptions.
+
+🚀 Features
+✅ Add, update, delete, and list to-do items
+🧠 Semantic search powered by pgvector and sentence-transformers
+🐳 Dockerized: easy to run locally or in production
+🗄️ PostgreSQL database with vector indexing
+📦 Backend and frontend services with a clean architecture
+🧱 Tech Stack
+Backend: Node.js (Express) or Python (Flask/Django)
+Frontend: React.js or Flutter Web
+Database: PostgreSQL + pgvector
+Embeddings: Sentence Transformers (all-MiniLM-L6-v2)
+Deployment: Docker, Docker Compose
+📦 Getting Started
+Prerequisites
+Docker and Docker Compose
+Git
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
