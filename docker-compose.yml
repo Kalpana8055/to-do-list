@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: ankane/pgvector  # PostgreSQL with pgvector extension
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: taskdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  embedding_service:
+    build:
+      context: ./embedding_service
+      dockerfile: Dockerfile.embedding
+    ports:
+      - "8000:8000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      DB_HOST: postgres
+      DB_USER: postgres          # <-- fixed to match POSTGRES_USER
+      DB_PASSWORD: yourpassword  # <-- fixed to match POSTGRES_PASSWORD
+      DB_NAME: taskdb
+      EMBEDDING_SERVICE_URL: http://embedding_service:8000
+    depends_on:
+      - postgres
+      - embedding_service
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: http://backend:5000
+
+volumes:
+  pgdata:
+
